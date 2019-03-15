@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SFC } from 'react';
 import { Button, Form, Input, Row } from 'antd';
 import { connect } from 'dva';
 import { WrappedFormUtils } from "antd/lib/form/Form";
@@ -10,8 +11,7 @@ interface Props {
     dispatch: any;
     form: WrappedFormUtils;
 }
-
-const Bform: Partial<Props> = ({ btnType = 'default', dispatch, form }) => {
+const Bform: SFC<Partial<Props>> = ({ btnType = 'default', dispatch, form }) => {
     const { getFieldDecorator, validateFields } = form;
     const formItemLayout = {
         labelCol: {
@@ -26,7 +26,8 @@ const Bform: Partial<Props> = ({ btnType = 'default', dispatch, form }) => {
             if (err) return;
             console.log(fieldsValue);
             dispatch({
-                type: 'test/fetch',
+                type: 'test/fetchList',
+                payload: { ...fieldsValue }
             })
         });
     }
